@@ -11,9 +11,13 @@ class AutorAdmin(admin.ModelAdmin):
         ('date_of_birth', 'date_of_death')
     ]
 
+class BookInstanceInline(admin.TabularInline):
+    model = BookInstance
+
 @admin.register(Book)
 class BookAdmin(admin.ModelAdmin):
     list_display = ('title', 'author', 'display_genre')
+    inlines = [BookInstanceInline]
 
 @admin.register(BookInstance)
 class BookInstanceAdmin(admin.ModelAdmin):
