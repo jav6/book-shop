@@ -10,5 +10,8 @@ class AutorAdmin(admin.ModelAdmin):
 class BookAdmin(admin.ModelAdmin):
     list_display = ('title', 'author', 'display_genre')
 
-# @admin.register(BookInstance)
+@admin.register(BookInstance)
+class BookInstanceAdmin(admin.ModelAdmin):
+    list_filter = ('status', 'due_back')
+
 # @admin.register(Genre)
