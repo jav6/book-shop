@@ -30,3 +30,6 @@ class BookListView(generic.ListView):
         context['my_book_list'] = Book.objects.all()
         
         return context
+
+class BookDetailView(generic.DetailView):
+    model = Book
