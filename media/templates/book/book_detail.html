@@ -1,0 +1,43 @@
+{% extends 'shared/site.html' %}
+{% block body %}
+<div style="margin-top: 100px;"></div>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-2">
+            <ul class="sidebar-nav">
+                <li><a href="{% url 'book:index' %}">Home</a></li>
+                <li><a href="#">All Books</a></li>
+                <li><a href="#">All authors</a></li>
+            </ul>
+        </div>
+        <div class="col-md-10">
+            <h1>Local library Home</h1>
+            <p>Welcome to localLibrary, a very basic Django website developed as a practice.</p>
+            <hr>
+            <h2>Daynamic content</h2>
+            <p>The library has the following record counts:</p>
+            <ul class="list-unstyled">
+                <li><p><strong>Title: </strong>{{ book.title }}</p></li>
+                <li><p><strong>Summary: </strong>{{ book.summary }}</p></li>
+                <li><p><strong>ISBN: </strong>{{ book.isbn }}</p></li>
+                <li>
+                <p>
+                <strong> Book Instance: </strong>
+                <br />
+                <ul>
+                    {% for copy in book.bookinstance_set.all %}
+                        {% if copy.status != 'a' %}
+                            <li><p><strong>Due Back: </strong>{{ copy.due_back }}</p></li>
+                            <li><p><strong>Imprint: </strong>{{ copy.imprint }}</p></li>
+                            <li><p><strong>ID: </strong>{{ copy.id }}</p></li>
+                            <hr />
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+                </p>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock body %}
