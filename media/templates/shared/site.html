@@ -12,6 +12,8 @@
     <link rel="stylesheet" href="{% static 'css/main.css' %}" />
 </head>
 <body>
+    {% include 'partials/navbar.html' %}
+    {% include 'partials/sidebar.html' %}
     {% block body %}{% endblock body %}
     <!-- Optional JavaScript; choose one of the two! -->
 
