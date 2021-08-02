@@ -16,27 +16,19 @@
             <hr>
             <h2>Daynamic content</h2>
             <p>The library has the following record counts:</p>
-            {% comment %} <ul class="list-unstyled">
-            {% for b in my_book_list %}
-            <li><p><strong> Title: {{ b.title }}</strong></p></li>
-            <li><p><strong> Summary: {{ b.summary }}</strong></p></li>
-            <hr />
-            {% endfor %}
-            </ul> {% endcomment %}
             <ul class="list-unstyled">
             {% if book_list %}
             {% for book in book_list %}
             <li><p><strong> Title: {{ book.title }}</strong></p></li>
-            {% comment %} <li><p><strong> Summary: {{ book.summary }}</strong></p></li> {% endcomment %}
-            {% comment %} <hr /> {% endcomment %}
             {% endfor %}
             {% if is_paginated %}
-                {% if page_obj.has_previous %}
-                    <a href="{{ request.path }}?page={{ page_obj.previous_page_number }}">Previous</a>
-                {% endif %}
-                {% if page_obj.has_next %}
-                    <a href="{{ request.path }}?page={{ page_obj.next_page_number }}">Next</a>
-                {% endif %}
+            {% if page_obj.has_previous %}
+            <a href="{{ request.path }}?page={{ page_obj.previous_page_number }}">Previous</a>
+            {% endif %}
+            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+            {% if page_obj.has_next %}
+            <a href="{{ request.path }}?page={{ page_obj.next_page_number }}">Next</a>
+            {% endif %}
             {% endif %}
             {% else %}
             <h1>No book are found!!!</h1>
