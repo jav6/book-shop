@@ -1,15 +1,9 @@
 {% extends 'shared/site.html' %}
+{% block title %}Book List{% endblock title %}
 {% block body %}
 <div style="margin-top: 100px;"></div>
 <div class="container-fluid">
-    <div class="row">
-        <div class="col-md-2">
-            <ul class="sidebar-nav">
-                <li><a href="{% url 'book:index' %}">Home</a></li>
-                <li><a href="#">All Books</a></li>
-                <li><a href="#">All authors</a></li>
-            </ul>
-        </div>
+{% include 'partials/sidebar.html' %}
         <div class="col-md-10">
             <h1>Local library Home</h1>
             <p>Welcome to localLibrary, a very basic Django website developed as a practice.</p>
