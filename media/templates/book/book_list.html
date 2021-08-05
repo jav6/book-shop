@@ -3,32 +3,30 @@
 {% block body %}
 <div style="margin-top: 100px;"></div>
 <div class="container-fluid">
-{% include 'partials/sidebar.html' %}
-        <div class="col-md-10">
-            <h1>Local library Home</h1>
-            <p>Welcome to localLibrary, a very basic Django website developed as a practice.</p>
-            <hr>
-            <h2>Daynamic content</h2>
-            <p>The library has the following record counts:</p>
-            <ul class="list-unstyled">
-            {% if book_list %}
-            {% for book in book_list %}
-            <li><p><strong> Title: {{ book.title }}</strong></p></li>
-            {% endfor %}
-            {% if is_paginated %}
-            {% if page_obj.has_previous %}
-            <a href="{{ request.path }}?page={{ page_obj.previous_page_number }}">Previous</a>
-            {% endif %}
-            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
-            {% if page_obj.has_next %}
-            <a href="{{ request.path }}?page={{ page_obj.next_page_number }}">Next</a>
-            {% endif %}
-            {% endif %}
-            {% else %}
-            <h1>No book are found!!!</h1>
-            {% endif %}
-            </ul>
-        </div>
+  <div class="row justify-content-center text-center">
+    <table class="table table-success w-75 p-3">
+      <thead>
+        <tr>
+          <th>Nu</th>
+          <td>Title</td>
+          <td>Summary</td>
+          <td>Link</td>
+        </tr>
+      </thead>
+      <tbody>
+          {% if book_list %}
+          {% for book in book_list %}
+          <tr>
+            <th>{{ forloop.counter }}</th>
+          <td>{{ book.title }}</td>
+          <td>{{ book.summary }}</td>
+          <td><a class="btn btn-primary" href="{% url 'book:bookDetail' book.id  %}">Detail</a></td>
+          </tr>
+          {% endfor %}
+          {% endif %}
+      </tbody>
+    </table>
+    {% include 'partials/pagination.html' %}
     </div>
 </div>
 {% endblock body %}
