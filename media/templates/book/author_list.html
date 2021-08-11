@@ -1,0 +1,19 @@
+{% extends 'shared/site.html' %}
+{% block title %}Author - List{% endblock title %}
+{% block body %}
+{% if author_list %}
+<h1 class="ps-5 pt-5"><strong>List of our authors:</strong></h1>
+<div class="p-5">
+{% for author in author_list %}
+    <ul class="list-unstyled ps-5">
+        <li><small>Author number : {{ forloop.counter }}</small>
+            <ul>
+                <li><em>{{ author.first_name }} {{ author.last_name }}</em></li>
+                <li><i>{{ author.date_of_birth }}</i></li>
+            </ul>
+        </li>
+    </ul>
+{% endfor %}
+</div>
+{% endif %}
+{% endblock body %}
