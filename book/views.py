@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.views import generic
+from django.db.models import Q
 
 from .models import Author, Book, BookInstance, Genre
 
@@ -19,12 +20,6 @@ def index(request):
 class BookListView(generic.ListView):
     model = Book
     paginate_by = 3
-
-
-    # def get_queryset(self):
-    #     return Book.objects.filter(title__icontains='django')[:5]
-    
-
     def get_context_data(self, **kwargs):
         context = super(BookListView, self).get_context_data(**kwargs)
         
@@ -37,3 +32,17 @@ class BookDetailView(generic.DetailView):
 
 class AuthorListView(generic.ListView):
     model = Author
+
+class SearchResultsView(generic.ListView):
+    model = Book
+    paginate_by = 2
+    template_name = 'book/search_results.html'
+    def get_queryset(self):
+        if self.request.GET.get('q'):
+            query = self.request.GET.get('q')
+        else:
+            query = ''
+        object_list = Book.objects.filter(
+            Q(title__icontains=query) | Q(summary__icontains=query)
+        )
+        return object_list
